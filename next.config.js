@@ -1,6 +1,16 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
+
+const { NODE_ENV: environment } = process.env;
+let API_HOST = 'http://localhost:3000';
+
+if(environment==='production'){
+  API_HOST='http://google.com'
 }
 
+const nextConfig = {
+  reactStrictMode: true,
+  env: {
+    'API_HOST': API_HOST
+  }
+}
 module.exports = nextConfig
