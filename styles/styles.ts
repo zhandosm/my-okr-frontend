@@ -1,0 +1,1 @@
+export const darkButtonStyleClasses:string = 'bg-moblack text-mowhite text-center border-2 rounded-full py-2 text-lg font-bold border-moblack hover:bg-mowhite hover:text-mogreen hover:border-mogreen transition-colors';
