@@ -11,6 +11,16 @@ const nextConfig = {
   reactStrictMode: true,
   env: {
     'API_HOST': API_HOST
-  }
+  },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/welcome',
+        permanent: true,
+      },
+    ]
+  },
+
 }
 module.exports = nextConfig

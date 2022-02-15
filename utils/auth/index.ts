@@ -1,1 +1,1 @@
-export * from './authenticate-auth-cookie.util';
+export * from './authenticate-ss-props'
