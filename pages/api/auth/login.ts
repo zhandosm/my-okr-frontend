@@ -22,6 +22,8 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
                 return res.status(201).json(resMessage(201));
             }catch(err: any ){
                 if(err.response.status===401) return res.status(401).json(resMessage(401));
+                if(err.response.status===404) return res.status(404).json(resMessage(404));
+                throw new Error("Unexpected error")
             }
             break;
         default:

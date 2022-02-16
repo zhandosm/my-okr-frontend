@@ -34,6 +34,9 @@ const Page: NextPage = () => {
 			}else if (err.response.status === 400) {
 				alert("Invalid Credentials");
 				return;
+			}else if (err.response.status === 404) {
+				alert("User doesn't exist");
+				return;
 			}
 			console.log(err.response.status);
 			alert(err.message);
