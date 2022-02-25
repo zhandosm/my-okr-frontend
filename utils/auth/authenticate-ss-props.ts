@@ -9,7 +9,7 @@ export async function authCheck(ctx: GetServerSidePropsContext) {
           return {
             redirect: {
               permanent: false,
-              destination: "/p",
+              destination: "/p/dashboard",
             },
             props:{},
           };
