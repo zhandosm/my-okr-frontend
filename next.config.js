@@ -20,8 +20,8 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/p',
-        destination: '/p/dashboard',
+        source: '/myokr',
+        destination: '/myokr/dashboard',
         permanent: true,
       },
     ]
