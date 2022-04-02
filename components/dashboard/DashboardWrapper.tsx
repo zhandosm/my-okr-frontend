@@ -1,4 +1,4 @@
-import Image from "next/image";
+import axios, { AxiosRequestConfig } from "axios";
 import { FunctionComponent, useState } from "react";
 import ObjectiveButton from "./ObectiveButton";
 import ProjectButton from './ProjectButton';
@@ -28,12 +28,18 @@ const DashboardWrapper: FunctionComponent<DashboardProps> = ({ children, project
 	const [chosenProject, setChosenProject] = useState(initialProject._id);
 	const [objectivesList, setObjectivesList] = useState(initialProject.objectives);
 	const [chosenObjective, setChosenObjective] = useState(initialProject.objectives[0]._id);
-	const handleProjectClick = (id: string):void => {
-		setChosenProject((prevState) => {
-			if(prevState===id) return id;
+	const handleProjectClick = async (id: string):Promise<void> => {
+		if(chosenProject===id) return;
+		try{
+			const axiosConfig:AxiosRequestConfig = { withCredentials: true };
+			const response = await axios.get(`${process.env.API_HOST}/projects/${id}`, axiosConfig);
+			console.log(response)
 			console.log("Loading new project")
-			return id;
-		});
+			setChosenProject(id);
+		}catch (err){
+			console.log(err);
+			alert("error");
+		}
 	};
 	const handleObjectiveClick = (id: string):void => {
 		setChosenObjective((prevState) => {
