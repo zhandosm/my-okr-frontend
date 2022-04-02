@@ -19,26 +19,26 @@ const Page: NextPage = () => {
 			return;
 		}
 		try {
-			const url = `api/auth/login`;
+			const url = `${process.env.API_HOST}/auth/login`;
 			const data = {
 				username: username,
 				password: password,
 			};
-			const response = await axios.post(url, data);
+			const response = await axios.post(url, data, { withCredentials: true });
 			if (response.status !== 201) throw new Error("Unexpected Error");
 			router.reload();
 		} catch (err: any) {
-			if (err.response.status === 401) {
+			if (err.response && err.response.status === 401) {
 				alert("Wrong Credentials");
 				return;
-			}else if (err.response.status === 400) {
+			}else if (err.response && err.response.status === 400) {
 				alert("Invalid Credentials");
 				return;
-			}else if (err.response.status === 404) {
+			}else if (err.response && err.response.status === 404) {
 				alert("User doesn't exist");
 				return;
 			}
-			console.log(err.response.status);
+			console.log(err.response);
 			alert(err.message);
 		}
 	}
