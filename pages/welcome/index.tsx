@@ -1,7 +1,7 @@
 import type { GetServerSidePropsContext, NextPage } from "next";
-import { authCheck } from "../utils";
-import { RedirectButton } from "../components/welcome/buttons";
-import WelcomeComponent from "../components/welcome";
+import { authCheck } from "../../utils";
+import { RedirectButton } from "../../components/welcome/buttons";
+import WelcomeComponent from "../../components/welcome";
 
 interface RedirectButtonInterface {
 	name: string;
@@ -27,9 +27,5 @@ const WelcomePage: NextPage = () => {
 		</WelcomeComponent>
 	);
 };
-
-export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-	return await authCheck(ctx);
-}
 
 export default WelcomePage;

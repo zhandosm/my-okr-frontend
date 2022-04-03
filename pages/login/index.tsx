@@ -1,12 +1,11 @@
-import type { GetServerSidePropsContext, NextPage } from "next";
+import type { NextPage } from "next";
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { authCheck } from "../utils";
-import WelcomeComponent from "../components/welcome/index";
-import WelcomeForm from "../components/welcome/form";
-import { SubmitInterface } from "../components/welcome/interfaces";
-import WelcomeInput from "../components/welcome/input";
+import WelcomeComponent from "../../components/welcome/index";
+import WelcomeForm from "../../components/welcome/form";
+import { SubmitInterface } from "../../components/welcome/interfaces";
+import WelcomeInput from "../../components/welcome/input";
 
 const Page: NextPage = () => {
 	const router = useRouter();
@@ -67,9 +66,5 @@ const Page: NextPage = () => {
 		</WelcomeComponent>
 	);
 };
-
-export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-	return await authCheck(ctx);
-}
 
 export default Page;
