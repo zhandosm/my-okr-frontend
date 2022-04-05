@@ -20,12 +20,12 @@ export async function auth(req: NextRequest, res: NextResponse) {
 
 export async function noAuth(req: NextRequest, res: NextResponse) {
     try{
-        const checkUrl = `${process.env.API_HOST}/auth/check`
+        const checkUrl = `${process.env.API_HOST}/auth/check`;
         const headers = new Headers();
         headers.append("Authorization", req.cookies.Authorization)
         const authenticated = await fetch(checkUrl, { headers: headers });
         const url = req.nextUrl.clone()
-        url.pathname = "/welcome";
+        url.pathname = "/myokr/dashboard";
         if(authenticated.status===200) return NextResponse.redirect(url);
         if(authenticated.status===401) return NextResponse.next();
     }catch(err){
