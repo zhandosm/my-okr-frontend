@@ -33,9 +33,11 @@ const DashboardWrapper: FunctionComponent<DashboardProps> = ({ children, project
 		try{
 			const axiosConfig:AxiosRequestConfig = { withCredentials: true };
 			const response = await axios.get(`${process.env.API_HOST}/projects/${id}`, axiosConfig);
-			console.log(response)
-			console.log("Loading new project")
+			const { data } = response;
+			console.log(id)
 			setChosenProject(id);
+			setObjectivesList(data.objectives);
+			setChosenObjective(objectivesList && objectivesList.length ? objectivesList[0]._id : '');
 		}catch (err){
 			console.log(err);
 			alert("error");
