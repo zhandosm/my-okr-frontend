@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { FunctionComponent, useState } from "react";
+import KeyResultCard from "../keyResult";
 import ObjectiveButton from "./ObectiveButton";
 import ProjectButton from './ProjectButton';
 
@@ -25,9 +26,10 @@ type DashboardProps = {
 }
 
 const DashboardWrapper: FunctionComponent<DashboardProps> = ({ children, projects, initialProject }) => {
-	const [chosenProject, setChosenProject] = useState(initialProject._id);
-	const [objectivesList, setObjectivesList] = useState(initialProject.objectives);
-	const [chosenObjective, setChosenObjective] = useState(initialProject.objectives[0]._id);
+	const [chosenProject, setChosenProject] = useState<string>(initialProject._id);
+	const [objectivesList, setObjectivesList] = useState<[]>(initialProject.objectives);
+	const [chosenObjective, setChosenObjective] = useState<string>('');
+	const [keyResultsList, setKeyResultsList] = useState<null | []>(null);
 	const handleProjectClick = async (id: string):Promise<void> => {
 		if(chosenProject===id) return;
 		try{
@@ -42,12 +44,20 @@ const DashboardWrapper: FunctionComponent<DashboardProps> = ({ children, project
 			alert("error");
 		}
 	};
-	const handleObjectiveClick = (id: string):void => {
-		setChosenObjective((prevState) => {
-			if(prevState===id) return id;
-			console.log("Loading new objective key results")
-			return id;
-		});
+	const handleObjectiveClick = async (id: string):Promise<void> => {
+		if(chosenObjective===id) return;
+		try{
+			const axiosConfig:AxiosRequestConfig = { withCredentials: true };
+			const response = await axios.get(`${process.env.API_HOST}/objectives/${id}`, axiosConfig);
+			console.log(response)
+			const { data } = response;
+			setChosenObjective(id);
+			console.log(data.keyResults)
+			setKeyResultsList(data.keyResults)
+		}catch (err){
+			console.log(err);
+			alert("error");
+		}
 	};
 	return (
 		<main className="flex min-h-screen py-3">
@@ -70,12 +80,23 @@ const DashboardWrapper: FunctionComponent<DashboardProps> = ({ children, project
 					<path d="M1.44886 23H5.07955V15.142C5.07955 13.6932 6 12.7301 7.21023 12.7301C8.40341 12.7301 9.20455 13.5483 9.20455 14.8352V23H12.7244V15.0057C12.7244 13.6506 13.5 12.7301 14.821 12.7301C15.9801 12.7301 16.8494 13.4545 16.8494 14.9119V23H20.4716V14.196C20.4716 11.358 18.7841 9.73864 16.3466 9.73864C14.429 9.73864 12.9375 10.7188 12.4006 12.2188H12.2642C11.8466 10.7017 10.5085 9.73864 8.71023 9.73864C6.94602 9.73864 5.60795 10.6761 5.0625 12.2188H4.90909V9.90909H1.44886V23ZM25.1122 27.9091C27.8139 27.9091 29.2457 26.5284 29.9872 24.4148L35.0753 9.92614L31.2315 9.90909L28.4957 19.5227H28.3594L25.6491 9.90909H21.831L26.527 23.375L26.3139 23.929C25.8366 25.1562 24.9247 25.2159 23.6463 24.8239L22.8281 27.5341C23.348 27.7557 24.1918 27.9091 25.1122 27.9091Z" fill="#111317"/>
 				</svg>
 				<div className="py-3">
-					{objectivesList.map((objective, i)=>{
-						return <ObjectiveButton onClick={()=>handleObjectiveClick(objective._id)} active={chosenObjective===objective._id} key={i}>{objective.title}</ObjectiveButton>
-					})}
+					<div>
+						{objectivesList.map((objective, i)=>{
+							return <ObjectiveButton onClick={()=>handleObjectiveClick(objective._id)} active={chosenObjective===objective._id} key={i}>{objective.title}</ObjectiveButton>
+						})}
+					</div>
 				</div>
 			</div>
-			<div className="flex flex-col w-full">{children}</div>
+			<div className="flex flex-col w-full px-14 py-6">
+				{children}
+				{
+					keyResultsList && (keyResultsList instanceof Array) ?
+						keyResultsList.length ? keyResultsList.map((keyResultObj, i)=>{
+						return <KeyResultCard key={i} name={keyResultObj.title} />
+						}) : 'No Key Results to display' 
+					: "No Objective Chosen"
+				}
+			</div>
 		</main>
 	);
 };
