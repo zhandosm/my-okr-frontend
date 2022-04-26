@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { FunctionComponent, useState } from "react";
+import { useProjects } from "../../hooks";
 import KeyResultCard from "../keyResult";
 import ObjectiveButton from "./ObectiveButton";
 import ProjectButton from './ProjectButton';
@@ -30,19 +31,25 @@ const DashboardWrapper: FunctionComponent<DashboardProps> = ({ children, project
 	const [objectivesList, setObjectivesList] = useState<[]>(initialProject.objectives);
 	const [chosenObjective, setChosenObjective] = useState<string>('');
 	const [keyResultsList, setKeyResultsList] = useState<null | []>(null);
+	
+	const receiveData = (data:any) => {
+		console.log(data)
+	};
+	const { data, isLoading, isFetching, refetch } = useProjects(chosenProject, receiveData)
 	const handleProjectClick = async (id: string):Promise<void> => {
 		if(chosenProject===id) return;
-		try{
-			const axiosConfig:AxiosRequestConfig = { withCredentials: true };
-			const response = await axios.get(`${process.env.API_HOST}/projects/${id}`, axiosConfig);
-			const { data } = response;
-			setChosenProject(id);
-			setObjectivesList(data.objectives);
-			setChosenObjective(objectivesList && objectivesList.length ? objectivesList[0]._id : '');
-		}catch (err){
-			console.log(err);
-			alert("error");
-		}
+		setChosenProject(id);
+		// try{
+		// 	const axiosConfig:AxiosRequestConfig = { withCredentials: true };
+		// 	const response = await axios.get(`${process.env.API_HOST}/projects/${id}`, axiosConfig);
+		// 	const { data } = response;
+		// 	setChosenProject(id);
+		// 	setObjectivesList(data.objectives);
+		// 	setChosenObjective(objectivesList && objectivesList.length ? objectivesList[0]._id : '');
+		// }catch (err){
+		// 	console.log(err);
+		// 	alert("error");
+		// }
 	};
 	const handleObjectiveClick = async (id: string):Promise<void> => {
 		if(chosenObjective===id) return;
@@ -61,6 +68,7 @@ const DashboardWrapper: FunctionComponent<DashboardProps> = ({ children, project
 	};
 	return (
 		<main className="flex min-h-screen py-3">
+			{isLoading && <h1>Loading Project</h1>}
 			<div className="flex flex-col px-2">
 				{projects.map((project, i)=>{
 					return <ProjectButton onClick={()=>handleProjectClick(project._id)} key={i} active={project._id===chosenProject}>{project.title[0]}</ProjectButton>
