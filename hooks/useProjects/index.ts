@@ -14,7 +14,7 @@ interface Callback {
 
 const useProjects = (id:string, callback:Callback) => {
     return useQuery(['project', { projectId: id }], () => fetchProject(id), {
-        enabled: true,
+        enabled: false,
         onSuccess: (data) => callback(data),
     } )
 }
