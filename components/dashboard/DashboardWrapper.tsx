@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 
 const DashboardWrapper: FunctionComponent = ({ children }) => {
 	const router = useRouter();
+	console.log(router.pathname==='/myokr/dashboard')
 	/*
 	const [projects, setProjects] = useState<[]>([]);
 	const [chosenProject, setChosenProject] = useState<string>();
@@ -64,9 +65,8 @@ const DashboardWrapper: FunctionComponent = ({ children }) => {
 					<div className="py-3">
 						<div>
 							<Link href="/">
-								<a className={`w-full text-sm text-left  hover:text-mogreen transition-colors ${router.pathname.indexOf("/myokr/dashboard")!==-1 ? 'text-mogreen font-semibold': 'font-normal text-moblack'}`}>Main</a>
+								<a className={`w-full text-sm text-left  hover:text-mogreen transition-colors ${router.pathname==='/myokr/dashboard' ? 'text-mogreen font-semibold': 'font-normal text-moblack'}`}>Main</a>
 							</Link>
-							
 							{/* <ObjectiveButton onClick={()=>handleObjectiveClick(objective._id)} active={chosenObjective===objective._id} key={i}>{1123312`12`123qwaobjective.title}</ObjectiveButton> */}
 							{/* {objectivesList.map((objective, i)=>{
 								return <ObjectiveButton onClick={()=>handleObjectiveClick(objective._id)} active={chosenObjective===objective._id} key={i}>{objective.title}</ObjectiveButton>
