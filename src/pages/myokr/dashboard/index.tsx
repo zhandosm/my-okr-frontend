@@ -1,10 +1,11 @@
 import type { NextPage } from 'next';
-import DashboardWrapper from '../../../../components/dashboard/DashboardWrapper';
+import DashboardWrapper from '../../../components/dashboard/DashboardWrapper';
 
 const Page: NextPage = () => {
   return (
     <DashboardWrapper>
-      Objective ID
+      MAIN DAHSBOARD
+      With today's data and stuff
     </DashboardWrapper>
   )
 }

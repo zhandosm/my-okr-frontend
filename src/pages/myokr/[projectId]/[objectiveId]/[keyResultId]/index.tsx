@@ -4,7 +4,8 @@ import DashboardWrapper from '../../../../../components/dashboard/DashboardWrapp
 const Page: NextPage = () => {
   return (
     <DashboardWrapper>
-      Key Result ID
+      Key Result Page
+      Scrum Board
     </DashboardWrapper>
   )
 }
