@@ -1,13 +1,11 @@
 import axios, { AxiosRequestConfig } from "axios";
 import { FunctionComponent, useState } from "react";
-import { useProjects } from "../../hooks";
-import KeyResultCard from "../keyResult";
-import ObjectiveButton from "./ObectiveButton";
-import ProjectButton from './ProjectButton';
+import { useProjects } from "../hooks";
+import { KeyResultCard, ObjectiveButton, ProjectButton } from ".";
 import Link from 'next/link'
 import { useRouter } from "next/router";
 
-const DashboardWrapper: FunctionComponent = ({ children }) => {
+export const CommonLayout: FunctionComponent = ({ children }) => {
 	const router = useRouter();
 	console.log(router.pathname==='/myokr/dashboard')
 	/*
@@ -81,5 +79,3 @@ const DashboardWrapper: FunctionComponent = ({ children }) => {
 		</main>
 	);
 };
-
-export default DashboardWrapper;

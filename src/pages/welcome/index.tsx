@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { RedirectButton, WelcomeComponent } from "@components/welcome";
+import { RedirectButton, WelcomeComponent } from "@components";
 
 interface RedirectButtonInterface {
 	name: string;

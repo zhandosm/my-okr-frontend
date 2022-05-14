@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import { useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/router";
-import { WelcomeInput, SubmitInterface, WelcomeForm, WelcomeComponent } from "@components/welcome";
+import { WelcomeInput, SubmitInterface, WelcomeForm, WelcomeComponent } from "@components";
 
 const Page: NextPage = () => {
 	const router = useRouter();

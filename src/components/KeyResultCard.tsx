@@ -5,7 +5,7 @@ type keyResultCardProps = {
     onClick?: any
 }
 
-const KeyResultCard: FunctionComponent<keyResultCardProps>  = ({ name, onClick }) => {
+export const KeyResultCard: FunctionComponent<keyResultCardProps>  = ({ name, onClick }) => {
     return <button type="button" onClick={onClick} className='rounded-lg bg-plainwhite text-moblack font-normal px-7 py-5 my-3 flex justify-between items-center hover:text-mogreen transition-all active:drop-shadow'>
         <span>{name}</span>
         <div className="flex items-center">
@@ -16,5 +16,3 @@ const KeyResultCard: FunctionComponent<keyResultCardProps>  = ({ name, onClick }
         </div>
     </button>
 };
-
-export default KeyResultCard;

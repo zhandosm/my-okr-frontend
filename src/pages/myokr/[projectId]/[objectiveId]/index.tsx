@@ -1,12 +1,12 @@
 import type { NextPage } from 'next';
-import DashboardWrapper from '@components/dashboard/DashboardWrapper';
+import { CommonLayout } from '@components';
 
 const Page: NextPage = () => {
   return (
-    <DashboardWrapper>
+    <CommonLayout>
       Objective ID
       Key results List
-    </DashboardWrapper>
+    </CommonLayout>
   )
 }
 
