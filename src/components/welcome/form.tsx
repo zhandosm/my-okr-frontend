@@ -6,7 +6,7 @@ type WelcomeFormProps = {
     submit: SubmitInterface;
 }
 
-const WelcomeForm: FunctionComponent<WelcomeFormProps> = ({ children, submit }) => {
+export const WelcomeForm: FunctionComponent<WelcomeFormProps> = ({ children, submit }) => {
     const handleSubmit = async (e: SyntheticEvent) => {
         e.preventDefault();
         await submit.onSubmit()
@@ -16,5 +16,3 @@ const WelcomeForm: FunctionComponent<WelcomeFormProps> = ({ children, submit }) 
         <RegularButton type="submit" name={submit.name}/>
     </form>
 };
-
-export default WelcomeForm;

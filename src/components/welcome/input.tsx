@@ -7,7 +7,7 @@ type InputProps = {
 	setter: (value: string) => void;
 };
 
-const WelcomeInput: FunctionComponent<InputProps> = ({
+export const WelcomeInput: FunctionComponent<InputProps> = ({
 	type,
 	placeholder,
 	value,
@@ -23,5 +23,3 @@ const WelcomeInput: FunctionComponent<InputProps> = ({
 		/>
 	);
 };
-
-export default WelcomeInput;

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { FunctionComponent } from "react";
 
-const WelcomeComponent: FunctionComponent = ({ children }) => {
+export const WelcomeComponent: FunctionComponent = ({ children }) => {
 	return (
 		<div className="flex justify-center items-center min-h-screen px-2">
 			<main className="max-w-screen-sm w-full flex flex-col justify-center items-center">
@@ -16,5 +16,3 @@ const WelcomeComponent: FunctionComponent = ({ children }) => {
 		</div>
 	);
 };
-
-export default WelcomeComponent;

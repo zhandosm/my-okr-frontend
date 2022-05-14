@@ -17,10 +17,15 @@
     "baseUrl": "./src",
     "paths": {
       "~": ["./"],
-      "@components": ["./components"],
+      "~/*": ["./*"],
+      "@components": ["./components/"],
+      "@components/*": ["./components/*"],
       "@hooks": ["./hooks"],
+      "@hooks/*": ["./hooks/*"],
       "@utils": ["./utils"],
+      "@utils/*": ["./utils/*"],
       "@middlewares": ["./middlewares"],
+      "@middlewares/*": ["./middlewares/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],

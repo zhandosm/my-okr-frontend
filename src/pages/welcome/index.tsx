@@ -1,7 +1,5 @@
-import type { GetServerSidePropsContext, NextPage } from "next";
-import { authCheck } from "../../utils";
-import { RedirectButton } from "../../components/welcome/buttons";
-import WelcomeComponent from "../../components/welcome";
+import type { NextPage } from "next";
+import { RedirectButton, WelcomeComponent } from "@components/welcome";
 
 interface RedirectButtonInterface {
 	name: string;
