@@ -1,13 +1,13 @@
-import axios, { AxiosRequestConfig } from "axios";
 import { FunctionComponent, useState } from "react";
-import { useProjects } from "../hooks";
-import { KeyResultCard, ObjectiveButton, ProjectButton } from ".";
+import { useProjects } from "@hooks";
+import { KeyResultCard, ObjectiveButton, ProjectButton, Loader } from ".";
 import Link from 'next/link'
 import { useRouter } from "next/router";
 
+
 export const CommonLayout: FunctionComponent = ({ children }) => {
 	const router = useRouter();
-	console.log(router.pathname==='/myokr/dashboard')
+	const { data, isLoading, isError } = useProjects();
 	/*
 	const [projects, setProjects] = useState<[]>([]);
 	const [chosenProject, setChosenProject] = useState<string>();
@@ -42,15 +42,18 @@ export const CommonLayout: FunctionComponent = ({ children }) => {
 	return (
 		<main className="flex min-h-screen py-3">
 			<div className="flex min-h-full min-w-[16rem]">
-				<div className="flex flex-col px-2 min-w-10">
-					{/* {projects.map((project, i)=>{
-						return <ProjectButton onClick={()=>handleProjectClick(project._id)} key={i} active={project._id===chosenProject}>{project.title[0]}</ProjectButton>
-					})} */}
-					<ProjectButton active={false}>
-						<svg width="12" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
-							<path d="M6.75 1C6.75 0.585786 6.41421 0.25 6 0.25C5.58579 0.25 5.25 0.585786 5.25 1V5.25H1C0.585787 5.25 0.25 5.58579 0.25 6C0.25 6.41421 0.585787 6.75 1 6.75H5.25V11C5.25 11.4142 5.58579 11.75 6 11.75C6.41421 11.75 6.75 11.4142 6.75 11V6.75H11C11.4142 6.75 11.75 6.41421 11.75 6C11.75 5.58579 11.4142 5.25 11 5.25H6.75V1Z" fill="currentColor"/>
-						</svg>
-					</ProjectButton>
+				<div className="flex flex-col px-2 min-w-[52px]">
+					{data && <>
+						{data?.map((project, i)=>{
+							return <ProjectButton onClick={()=>console.log(project._id)} key={i} active={project._id==="chosenProject"}>{project.title[0]}</ProjectButton>
+						})}
+						<ProjectButton active={false}>
+							<svg width="12" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
+								<path d="M6.75 1C6.75 0.585786 6.41421 0.25 6 0.25C5.58579 0.25 5.25 0.585786 5.25 1V5.25H1C0.585787 5.25 0.25 5.58579 0.25 6C0.25 6.41421 0.585787 6.75 1 6.75H5.25V11C5.25 11.4142 5.58579 11.75 6 11.75C6.41421 11.75 6.75 11.4142 6.75 11V6.75H11C11.4142 6.75 11.75 6.41421 11.75 6C11.75 5.58579 11.4142 5.25 11 5.25H6.75V1Z" fill="currentColor"/>
+							</svg>
+						</ProjectButton>
+					</>}
+					{ isLoading && <Loader style={{padding: 0, height: 'auto', maxWidth: "52px"}}/> }
 				</div>
 				<div className='rounded-2xl bg-plainwhite drop-shadow px-6 py-3 w-72'>
 					<svg width="87" height="29" viewBox="0 0 87 29" fill="none" xmlns="http://www.w3.org/2000/svg">

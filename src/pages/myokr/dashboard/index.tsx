@@ -5,7 +5,6 @@ const Page: NextPage = () => {
   return (
     <CommonLayout>
       MAIN DAHSBOARD
-      With today's data and stuff
     </CommonLayout>
   )
 }

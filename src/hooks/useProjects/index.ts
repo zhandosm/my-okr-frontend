@@ -1,22 +1,16 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { useQuery } from 'react-query'
 
-const fetchProject = async (id:string) => {
+export const fetchProjects = async () => {
     const axiosConfig:AxiosRequestConfig = { withCredentials: true };
-    const response = await axios.get(`${process.env.API_HOST}/projects/${id}`, axiosConfig);
+    const response = await axios.get(`${process.env.API_HOST}/projects`, axiosConfig);
     const { data } = response;
     return data;
 }
-
 interface Callback {
     (data:any): void
 }
 
-const useProjects = (id:string, callback:Callback) => {
-    return useQuery(['project', { projectId: id }], () => fetchProject(id), {
-        enabled: false,
-        onSuccess: (data) => callback(data),
-    } )
+export const useProjects = () => {
+    return useQuery(['projects'], () => fetchProjects())
 }
-
-export { useProjects, fetchProject }
