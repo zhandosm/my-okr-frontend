@@ -1,12 +1,12 @@
 import React, { FunctionComponent } from 'react';
 
 type keyResultCardProps = {
-    name: string,
+    title: string,
     onClick?: any
 }
 
-export const KeyResultCard: FunctionComponent<keyResultCardProps>  = ({ name, onClick }) => {
-    return <button type="button" onClick={onClick} className='rounded-lg bg-plainwhite text-moblack font-normal px-7 py-5 my-3 flex justify-between items-center hover:text-mogreen transition-all active:drop-shadow'>
+export const KeyResultCard: FunctionComponent<keyResultCardProps>  = ({ title: name, onClick }) => {
+    return <button type="button" onClick={onClick} className='rounded-lg bg-plainwhite text-moblack font-normal px-7 py-5 my-3 flex justify-between items-center hover:text-mogreen transition-all active:drop-shadow max-w-full w-full'>
         <span>{name}</span>
         <div className="flex items-center">
             <span className="mx-3">view to-dos</span>

@@ -37,9 +37,9 @@ export const CommonLayout: FunctionComponent = ({ children }) => {
 	};
 
 	return (
-		<main className="flex min-h-screen py-3">
-			<div className="flex min-h-full min-w-[16rem]">
-				<div className="flex flex-col px-2 min-w-[52px]">
+		<main className="flex min-h-screen py-3 max-h-screen">
+			<div className="flex min-h-full min-w-[16rem] max-h-full overflow-hidden">
+				<div className="flex flex-col px-2 min-w-[52px] overflow-y-scroll">
 					{projectsData && <>
 						{projectsData?.map((project:ProjectObj, i:number)=>{
 							return (
@@ -59,7 +59,7 @@ export const CommonLayout: FunctionComponent = ({ children }) => {
 					</>}
 					{ projectsLoading && <Loader style={{maxWidth: "35px"}}/> }
 				</div>
-				<div className='rounded-2xl bg-plainwhite drop-shadow px-6 py-3 w-72'>
+				<div className='rounded-2xl bg-plainwhite px-6 py-3 w-72 overflow-y-scroll'>
 					<button onClick={() => router.push('/myokr/dashboard')}>
 						<svg width="87" height="29" viewBox="0 0 87 29" fill="none" xmlns="http://www.w3.org/2000/svg">
 							<path d="M64.4489 23H68.0795V18.8409L69.0597 17.7244L72.6307 23H76.8835L71.7784 15.5767L76.6364 9.90909H72.4688L68.2756 14.8778H68.0795V5.54545H64.4489V23ZM78.4176 23H82.0483V15.5938C82.0483 13.983 83.2244 12.875 84.8267 12.875C85.3295 12.875 86.0199 12.9602 86.3608 13.071V9.84943C86.0369 9.77273 85.5852 9.72159 85.2188 9.72159C83.7528 9.72159 82.5511 10.5739 82.0739 12.1932H81.9375V9.90909H78.4176V23Z" fill="#111317"/>
@@ -85,7 +85,7 @@ export const CommonLayout: FunctionComponent = ({ children }) => {
 					</div>
 				</div>
 			</div>
-			<div className="flex flex-col w-full px-14 py-6">
+			<div className="flex flex-col w-full px-10 py-1">
 				{children}
 			</div>
 		</main>
