@@ -3,4 +3,4 @@ import { CommonLayout } from '@components';
 
 const Page: NextPage = () => <CommonLayout/>;
 
-export default Page
+export default Page;

@@ -5,9 +5,9 @@ type keyResultCardProps = {
     onClick?: any
 }
 
-export const KeyResultCard: FunctionComponent<keyResultCardProps>  = ({ title: name, onClick }) => {
+export const KeyResultCard: FunctionComponent<keyResultCardProps>  = ({ title, onClick }) => {
     return <button type="button" onClick={onClick} className='rounded-lg bg-plainwhite text-moblack font-normal px-7 py-5 my-3 flex justify-between items-center hover:text-mogreen transition-all active:drop-shadow max-w-full w-full'>
-        <span>{name}</span>
+        <span>{title}</span>
         <div className="flex items-center">
             <span className="mx-3">view to-dos</span>
             <svg width="7" height="14" viewBox="0 0 7 14" fill="none" xmlns="http://www.w3.org/2000/svg">
