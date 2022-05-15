@@ -1,6 +1,6 @@
 export * from "./CommonLayout"
 export * from "./KeyResultCard"
 export * from "./Loader"
-export * from "./ObectiveButton"
+export * from "./ObjectiveButton"
 export * from "./ProjectButton"
 export * from "./welcome"

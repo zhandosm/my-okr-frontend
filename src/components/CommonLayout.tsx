@@ -1,5 +1,6 @@
 import { FunctionComponent } from "react";
-import { useProjects } from "@hooks";
+import { useProjects, useObjectives } from "@hooks";
+import { ObjectiveButton } from "@components";
 import { ProjectButton, Loader } from ".";
 import { useRouter } from "next/router";
 
@@ -13,29 +14,50 @@ interface ProjectObj {
 	_id: string;
 }
 
+interface ObjectiveObj {
+	description: string;
+	projectId: string;
+	title: string;
+	userId: string;
+	__v: number;
+	_id: string;
+}
+
 export const CommonLayout: FunctionComponent = ({ children }) => {
 	const router = useRouter();	
-	const { data, isLoading } = useProjects();
+	const { data: projectsData, isLoading: projectsLoading } = useProjects();
+	const { data: objectivesData, isLoading: objectivesLoading } = useObjectives(router.query.projectId);;
 
 	const redirectToProject = (id: string):void => {
 		router.push(`/myokr/${id}`);
 	};
-	
+
+	const redirectToObjective = (id: string):void => {
+		router.push(`/myokr/${router.query.projectId}/${id}`);
+	};
+
 	return (
 		<main className="flex min-h-screen py-3">
 			<div className="flex min-h-full min-w-[16rem]">
 				<div className="flex flex-col px-2 min-w-[52px]">
-					{data && <>
-						{data?.map((project:ProjectObj, i:number)=>{
-							return <ProjectButton onClick={()=>redirectToProject(project._id)} key={i} active={ router.query && router.query.projectId && router.query.projectId === project._id ? true : false}>{project.title[0]}</ProjectButton>
+					{projectsData && <>
+						{projectsData?.map((project:ProjectObj, i:number)=>{
+							return (
+								<ProjectButton 
+									key={i}
+									onClick={()=>redirectToProject(project._id)}
+									active={ router.query && router.query.projectId && router.query.projectId === project._id ? true : false}
+									title={project.title}
+								/>
+							);
 						})}
-						<ProjectButton active={false}>
+						<ProjectButton title={""} active={false}>
 							<svg width="12" height="12" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path d="M6.75 1C6.75 0.585786 6.41421 0.25 6 0.25C5.58579 0.25 5.25 0.585786 5.25 1V5.25H1C0.585787 5.25 0.25 5.58579 0.25 6C0.25 6.41421 0.585787 6.75 1 6.75H5.25V11C5.25 11.4142 5.58579 11.75 6 11.75C6.41421 11.75 6.75 11.4142 6.75 11V6.75H11C11.4142 6.75 11.75 6.41421 11.75 6C11.75 5.58579 11.4142 5.25 11 5.25H6.75V1Z" fill="currentColor"/>
 							</svg>
 						</ProjectButton>
 					</>}
-					{ isLoading && <Loader style={{maxWidth: "35px"}}/> }
+					{ projectsLoading && <Loader style={{maxWidth: "35px"}}/> }
 				</div>
 				<div className='rounded-2xl bg-plainwhite drop-shadow px-6 py-3 w-72'>
 					<button onClick={() => router.push('/myokr/dashboard')}>
@@ -49,9 +71,17 @@ export const CommonLayout: FunctionComponent = ({ children }) => {
 					</button>
 					
 					<div className="py-3">
-						<div>
-							<button className={`w-full text-sm text-left  hover:text-mogreen transition-colors ${router.pathname==='/myokr/dashboard' ? 'text-mogreen font-semibold': 'font-normal text-moblack'}`} onClick={() => router.push('/myokr/dashboard')}>Main</button>
-						</div>
+						{objectivesData?.map((objective:ObjectiveObj, i:number) => {
+							return (
+								<ObjectiveButton
+									key={i}
+									onClick={()=>redirectToObjective(objective._id)}
+									active={ router.query && router.query.objectiveId && router.query.objectiveId === objective._id ? true : false}
+									title={objective.title}
+								/>
+							);
+						})}
+						{objectivesLoading && <Loader style={{maxWidth: "35px"}}/>}
 					</div>
 				</div>
 			</div>
