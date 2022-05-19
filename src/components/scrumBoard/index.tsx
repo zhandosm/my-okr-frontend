@@ -12,9 +12,9 @@ interface BoardDataObj {
 }
 
 export const ScrumBoard: FunctionComponent<BoardDataObj>  = ({ boardData }) => {
-    return <div>
-       <BoardColumn title="To-Do" toDos={boardData['0']}/>
-       <BoardColumn title="In-Progress" toDos={boardData['1']}/>
-       <BoardColumn title="Done" toDos={boardData['2']}/>
+    return <div className="h-full w-full flex justify-between space-x-4">
+       <BoardColumn status="0" toDos={boardData['0']}/>
+       <BoardColumn status="1" toDos={boardData['1']}/>
+       <BoardColumn status="2" toDos={boardData['2']}/>
     </div>
 };
