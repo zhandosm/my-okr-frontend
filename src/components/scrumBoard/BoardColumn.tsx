@@ -56,7 +56,7 @@ export const BoardColumn: FunctionComponent<BoardColumnDataObj>  = ({ toDos, sta
     return <div className="bg-mowhite rounded-lg p-3.5 w-1/3 md:w-full">
         <h5 className='font-medium'>{statusTitleMap[status]}</h5>
         <Droppable droppableId={status}>
-           {(provided)=><div ref={provided.innerRef} {...provided.droppableProps} className=''>
+           {(provided)=><div ref={provided.innerRef} {...provided.droppableProps} className='h-full'>
                 {toDos.map((toDoObj, i)=>{
                     return <ToDo
                         id={toDoObj._id}
