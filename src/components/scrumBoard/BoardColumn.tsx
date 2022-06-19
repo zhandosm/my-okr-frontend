@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
+import NewCardInput from './NewCardInput';
 
 export interface ToDoObj {
     keyResultId: string;
@@ -35,7 +36,6 @@ const statusTitleMap:StatusTitleMap = {
     '2': 'Done'
 }
 
-
 export const ToDo: FunctionComponent<ToDoProps>  = ({id, index, title}) => { 
     return <Draggable draggableId={id} index={index}>
         {(provided, snapshot)=><div
@@ -65,6 +65,7 @@ export const BoardColumn: FunctionComponent<BoardColumnDataObj>  = ({ toDos, sta
                         title={toDoObj.title}
                     />
                 })}
+                {status==="0" ? <NewCardInput/> : ""}
                 {provided.placeholder}
             </div>}
         </Droppable>
