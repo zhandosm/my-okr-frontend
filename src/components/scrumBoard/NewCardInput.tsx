@@ -1,13 +1,31 @@
+import axios, { AxiosRequestConfig } from 'axios';
+import { useRouter } from 'next/router';
 import React, { FunctionComponent, useState } from 'react';
+import { useMutation } from 'react-query';
+
+interface NewToDoBody {
+    projectId: string | string[] | undefined;
+	objectiveId: string | string[] | undefined;
+	keyResultId: string | string[] | undefined;
+	title: string;
+}
 
 const NewCardInput: FunctionComponent = () =>{
-    // const mutation = useMutation(newTodo => {
-    //     return axios.post('/todos', newTodo)
-    // });
+    const mutation = useMutation(newTodo => {
+        const axiosConfig:AxiosRequestConfig = { withCredentials: true };
+        return axios.post(`${process.env.API_HOST}/todos`, newTodo, axiosConfig)
+    });
+    const router = useRouter();
     const [toDotitle, setToDoTitle] = useState("");
     const handleSubmitToDo = (e:React.FormEvent) => {
         e.preventDefault();
-        alert(toDotitle);
+        const toDoBody:NewToDoBody = {
+            projectId: router.query.projectId,
+            objectiveId: router.query.objectiveId,
+            keyResultId: router.query.keyResultId,
+            title: toDotitle
+        }
+        mutation.mutate(toDoBody);
     };
     return (
         <form onSubmit={handleSubmitToDo}>
