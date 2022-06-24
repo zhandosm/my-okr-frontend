@@ -27,12 +27,14 @@ const NewCardInput: FunctionComponent = () =>{
         }
         mutation.mutate(toDoBody);
     };
+    mutation.isSuccess 
     return (
         <form onSubmit={handleSubmitToDo}>
             <input
+                disabled={mutation.isLoading}
                 value={toDotitle}
                 onChange={(e:React.FormEvent<HTMLInputElement>)=>setToDoTitle(e.currentTarget.value)}
-                className="flex items-center my-2 p-2 rounded-lg cursor-pointer transition-all border border-modarkgrey opacity-40 hover:opacity-80 focus:opacity-100 w-full"
+                className="flex items-center my-2 p-2 rounded-lg cursor-pointer transition-all border border-modarkgrey opacity-40 hover:opacity-80 focus:opacity-100 w-full disabled:opacity-20"
                 placeholder="Add new card"/>
         </form>
     );

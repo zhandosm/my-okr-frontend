@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 
 const { NODE_ENV: environment } = process.env;
-let API_HOST = 'http://localhost:3000';
+let API_HOST = 'http://localhost:8080';
 
 if(environment==='production'){
   API_HOST='http://google.com'

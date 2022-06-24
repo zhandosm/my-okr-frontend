@@ -57,6 +57,7 @@ export const BoardColumn: FunctionComponent<BoardColumnDataObj>  = ({ toDos, sta
         <h5 className='font-medium'>{statusTitleMap[status]}</h5>
         <Droppable droppableId={status}>
            {(provided)=><div ref={provided.innerRef} {...provided.droppableProps} className='h-full'>
+                {status==="0" ? <NewCardInput/> : ""}
                 {toDos.map((toDoObj, i)=>{
                     return <ToDo
                         id={toDoObj._id}
@@ -65,7 +66,6 @@ export const BoardColumn: FunctionComponent<BoardColumnDataObj>  = ({ toDos, sta
                         title={toDoObj.title}
                     />
                 })}
-                {status==="0" ? <NewCardInput/> : ""}
                 {provided.placeholder}
             </div>}
         </Droppable>
