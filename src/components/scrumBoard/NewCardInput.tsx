@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { useRouter } from 'next/router';
 import React, { FunctionComponent, useState } from 'react';
-import { useMutation } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
 
 interface NewToDoBody {
     projectId: string | string[] | undefined;
@@ -11,12 +11,31 @@ interface NewToDoBody {
 }
 
 const NewCardInput: FunctionComponent = () =>{
-    const mutation = useMutation(newTodo => {
-        const axiosConfig:AxiosRequestConfig = { withCredentials: true };
-        return axios.post(`${process.env.API_HOST}/todos`, newTodo, axiosConfig)
-    });
+    const queryClient = useQueryClient();
     const router = useRouter();
     const [toDotitle, setToDoTitle] = useState("");
+
+    const { mutate: addToDo, isLoading  } = useMutation(
+        newTodo => {
+            const axiosConfig:AxiosRequestConfig = { withCredentials: true };
+            return axios.post(`${process.env.API_HOST}/todos`, newTodo, axiosConfig)
+        },
+        {
+            onSuccess: async (response) => {
+                console.log()
+                queryClient.setQueryData(['toDos', { keyResultId: router.query.keyResultId }], (prev) => {
+                    setToDoTitle("");
+                    const data = prev;
+                    const toDoList = data['0'];
+                    toDoList.push(response.data);
+                    return data;
+                });
+            },
+            onError: () => alert("Something went wrong while creating new item")
+        }
+    );
+    
+    
     const handleSubmitToDo = (e:React.FormEvent) => {
         e.preventDefault();
         const toDoBody:NewToDoBody = {
@@ -25,13 +44,13 @@ const NewCardInput: FunctionComponent = () =>{
             keyResultId: router.query.keyResultId,
             title: toDotitle
         }
-        mutation.mutate(toDoBody);
+        addToDo(toDoBody);
     };
-    mutation.isSuccess 
+    
     return (
         <form onSubmit={handleSubmitToDo}>
             <input
-                disabled={mutation.isLoading}
+                disabled={isLoading}
                 value={toDotitle}
                 onChange={(e:React.FormEvent<HTMLInputElement>)=>setToDoTitle(e.currentTarget.value)}
                 className="flex items-center my-2 p-2 rounded-lg cursor-pointer transition-all border border-modarkgrey opacity-40 hover:opacity-80 focus:opacity-100 w-full disabled:opacity-20"
