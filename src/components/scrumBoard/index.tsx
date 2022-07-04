@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { updateToDoRequest } from '@hooks';
 import { ToDoObj, BoardColumn } from './BoardColumn';
@@ -15,28 +15,18 @@ interface BoardDataObj {
     boardData: ClassifiedToDos
 }
 
-const filterToDoList = (list:[], newToDoId:string, oldToDoRef:any) => {
-  return list.filter((toDoObj:any)=> {
-    if(toDoObj._id===newToDoId){
-      oldToDoRef = toDoObj;
-      console.log(toDoObj)
-      return false;
-    }else{
-      return true;
-    }
-  })
-}
-
 export const ScrumBoard: FunctionComponent<BoardDataObj>  = ({ boardData }) => {
   const queryClient = useQueryClient();
   const router = useRouter();
-  
+  const [tempPrevState, setTempPrevState] = useState(null);
   const { mutate: updateToDo  } = useMutation(
     updateParams => updateToDoRequest(updateParams.toDoId, updateParams.body),
     {
         onMutate: (updatedToDo) => {
             queryClient.setQueryData(['toDos', { keyResultId: router.query.keyResultId }], (prev) => {
                 const data = prev;
+                setTempPrevState("not null")
+                console.log(tempPrevState)
                 let oldToDo = null;
                 data[0] = data[0].filter((toDoObj:any)=> {
                   if(toDoObj._id===updatedToDo.toDoId){
@@ -67,7 +57,12 @@ export const ScrumBoard: FunctionComponent<BoardDataObj>  = ({ boardData }) => {
                 return data;
             });
         },
-        onError: () => alert("Something went wrong while moving item")
+        onError: () => {
+            queryClient.setQueryData(['toDos', { keyResultId: router.query.keyResultId }], (prev) => {
+              return tempPrevState;
+          });
+        },
+        onSuccess: () => setTempPrevState(null)
     }
 );
   

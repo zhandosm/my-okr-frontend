@@ -9,7 +9,6 @@ interface ToDoUpdateBody {
 export const updateToDoRequest = async (toDoId: string, body: ToDoUpdateBody,) => {
     const axiosConfig:AxiosRequestConfig = { withCredentials: true };
     const response = await axios.patch(`${process.env.API_HOST}/todos/${toDoId}`, body, axiosConfig);
-    console.log(response.data)
     return response.data;
 }
 
