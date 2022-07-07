@@ -3,6 +3,7 @@ import { useProjects, useObjectives } from "@hooks";
 import { ObjectiveButton } from "@components";
 import { ProjectButton, Loader } from ".";
 import { useRouter } from "next/router";
+import NewObjectiveInput from "./NewObjectiveInput";
 
 interface ProjectObj {
 	createdAt: string;
@@ -82,6 +83,7 @@ export const CommonLayout: FunctionComponent = ({ children }) => {
 								/>
 							);
 						})}
+						<NewObjectiveInput/>
 						{objectivesLoading && <Loader style={{maxWidth: "35px"}}/>}
 					</div>
 				</div>
