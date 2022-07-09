@@ -38,6 +38,7 @@ const NewCardInput: FunctionComponent = () =>{
     
     const handleSubmitToDo = (e:React.FormEvent) => {
         e.preventDefault();
+        if(!toDotitle) return alert("To Do can't be empty");
         const toDoBody:NewToDoBody = {
             projectId: router.query.projectId,
             objectiveId: router.query.objectiveId,

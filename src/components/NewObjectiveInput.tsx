@@ -30,6 +30,7 @@ const NewObjectiveInput: FunctionComponent = () =>{
     
     const handleSubmitToDo = (e:React.FormEvent) => {
         e.preventDefault();
+        if(!objectiveTitle) return alert("Objective can't be empty");
         const objectiveBody:NewObjectiveBody = {
             projectId: router.query.projectId,
             title: objectiveTitle,
