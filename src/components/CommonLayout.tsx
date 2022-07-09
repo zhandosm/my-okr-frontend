@@ -83,7 +83,7 @@ export const CommonLayout: FunctionComponent = ({ children }) => {
 								/>
 							);
 						})}
-						<NewObjectiveInput/>
+						{objectivesData && <NewObjectiveInput/>}
 						{objectivesLoading && <Loader style={{maxWidth: "35px"}}/>}
 					</div>
 				</div>

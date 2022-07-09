@@ -3,6 +3,7 @@ import { CommonLayout, KeyResultCard, Loader } from '@components';
 import { useKeyResults } from '../../../../hooks/useKeyResults/index';
 import { useRouter } from 'next/router';
 import { FunctionComponent } from 'react';
+import NewKeyResultInput from '@components/NewKeyResultInput';
 
 interface KeyResultObj {
 	description: string;
@@ -41,7 +42,8 @@ const Page: NextPage = () => {
       {keyResultsDataLoading && <LoadingKeyResultsList/>}
       {keyResultsDataLoading && <LoadingKeyResultsList/>}
       <div className='h-full max-h-full overflow-y-scroll px-1'>
-        {keyResultsData && keyResultsData.length ? <KeyResultsList keyResults={keyResultsData} />: <EmptyList/>}
+        {keyResultsData && keyResultsData.length ? <KeyResultsList keyResults={keyResultsData} /> : null}
+        {keyResultsData && <NewKeyResultInput/>}
       </div>
     </div>
   </CommonLayout>;
