@@ -6,7 +6,7 @@ type keyResultCardProps = {
 }
 
 export const KeyResultCard: FunctionComponent<keyResultCardProps>  = ({ title, onClick }) => {
-    return <button type="button" onClick={onClick} className='rounded-lg bg-plainwhite text-moblack font-normal px-5 py-3 my-3 flex justify-between items-center hover:text-mogreen transition-all active:drop-shadow max-w-full w-full'>
+    return <button type="button" onClick={onClick} className='rounded-lg bg-plainwhite text-moblack font-normal px-5 py-3 my-3 flex justify-between items-center max-w-full w-full hover:bg-modarkgrey hover:bg-opacity-5 active:bg-modarkgrey active:bg-opacity-10 active:transition-colors'>
         <span>{title}</span>
         <div className="flex items-center">
             <span className="mx-3">view to-dos</span>

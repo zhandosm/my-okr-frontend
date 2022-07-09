@@ -45,7 +45,7 @@ const NewObjectiveInput: FunctionComponent = () =>{
                 disabled={isLoading}
                 value={objectiveTitle}
                 onChange={(e:React.FormEvent<HTMLInputElement>)=>setObjectiveTitle(e.currentTarget.value)}
-                className="flex text-sm items-center my-2 p-1 cursor-pointer transition-all w-full disabled:opacity-40 outline-mogreen"
+                className="flex text-sm items-center my-2 p-1 cursor-pointer w-full disabled:opacity-40 outline-mogreen"
                 placeholder="+ New Objective"/>
         </form>
     );

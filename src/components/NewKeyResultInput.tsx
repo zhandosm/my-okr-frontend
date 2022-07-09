@@ -49,7 +49,7 @@ const NewObjectiveInput: FunctionComponent = () =>{
                 disabled={isLoading}
                 value={keyResultTitle}
                 onChange={(e:React.FormEvent<HTMLInputElement>)=>setKeyResultTitle(e.currentTarget.value)}
-                className='rounded-lg bg-plainwhite text-moblack font-normal px-5 py-3 flex justify-between items-center transition-all active:drop-shadow max-w-full w-full focus:outline-mogreen'
+                className='rounded-lg bg-plainwhite text-moblack font-normal px-5 py-3 flex justify-between items-center active:drop-shadow max-w-full w-full focus:outline-mogreen'
                 placeholder="+ New Key Result"/>
         </form>
     );
