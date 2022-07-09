@@ -1,6 +1,5 @@
 import { FunctionComponent } from "react";
 import { ObjectivesContainer, ProjectsContainer } from "@components";
-import { useRouter } from "next/router";
 
 export const CommonLayout: FunctionComponent = ({ children }) => {
 	return (

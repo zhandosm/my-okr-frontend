@@ -22,7 +22,6 @@ const NewCardInput: FunctionComponent = () =>{
         },
         {
             onSuccess: async (response) => {
-                console.log()
                 queryClient.setQueryData(['toDos', { keyResultId: router.query.keyResultId }], (prev) => {
                     setToDoTitle("");
                     const data = prev;
