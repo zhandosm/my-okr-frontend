@@ -1,9 +1,8 @@
 import type { NextPage } from 'next';
-import { CommonLayout, KeyResultCard, Loader } from '@components';
+import { CommonLayout, KeyResultCard, Loader, NewKeyResultInput } from '@components';
 import { useKeyResults } from '../../../../hooks/useKeyResults/index';
 import { useRouter } from 'next/router';
 import { FunctionComponent } from 'react';
-import NewKeyResultInput from '@components/NewKeyResultInput';
 
 interface KeyResultObj {
 	description: string;

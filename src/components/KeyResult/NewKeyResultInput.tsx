@@ -11,7 +11,7 @@ interface NewKeyResultBody {
     description: string;
 }
 
-const NewObjectiveInput: FunctionComponent = () =>{
+export const NewKeyResultInput: FunctionComponent = () =>{
     const queryClient = useQueryClient();
     const router = useRouter();
     const [keyResultTitle, setKeyResultTitle] = useState("");
@@ -44,15 +44,13 @@ const NewObjectiveInput: FunctionComponent = () =>{
     };
     
     return (
-        <form className="flex items-center" onSubmit={handleSubmitToDo}>
+        <form onSubmit={handleSubmitToDo}>
             <input
                 disabled={isLoading}
                 value={keyResultTitle}
                 onChange={(e:React.FormEvent<HTMLInputElement>)=>setKeyResultTitle(e.currentTarget.value)}
-                className='rounded-lg bg-plainwhite text-moblack font-normal px-5 py-3 flex justify-between items-center active:drop-shadow max-w-full w-full focus:outline-mogreen'
+                className='bg-molightgrey rounded-lg text-moblack font-normal px-5 py-3 max-w-full w-full opacity-40 border border-modarkgrey transition-all hover:opacity-80 focus:outline-mogreen focus:opacity-100 focus:bg-plainwhite'
                 placeholder="+ New Key Result"/>
         </form>
     );
 };
-
-export default NewObjectiveInput;

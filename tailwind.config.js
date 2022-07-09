@@ -10,7 +10,8 @@ module.exports = {
       mogreen: '#25A77A',
       molightgrey: '#F6F7F8',
       mowhite: '#FFFFFF', 
-      modarkgrey: '#5D6062'
+      modarkgrey: '#5D6062',
+      mored: '#f5463e'
     },
     fontFamily: {
       sans: ['Inter', 'sans-serif'],

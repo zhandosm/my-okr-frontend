@@ -9,7 +9,7 @@ interface NewObjectiveBody {
     description: string;
 } 
 
-const NewObjectiveInput: FunctionComponent = () =>{
+export const NewObjectiveInput: FunctionComponent = () =>{
     const queryClient = useQueryClient();
     const router = useRouter();
     const [objectiveTitle, setObjectiveTitle] = useState("");
@@ -45,10 +45,8 @@ const NewObjectiveInput: FunctionComponent = () =>{
                 disabled={isLoading}
                 value={objectiveTitle}
                 onChange={(e:React.FormEvent<HTMLInputElement>)=>setObjectiveTitle(e.currentTarget.value)}
-                className="flex text-sm items-center my-2 p-1 cursor-pointer w-full disabled:opacity-40 outline-mogreen"
+                className="flex text-sm items-center my-2 p-1 w-full disabled:opacity-40 outline-mogreen rounded border border-modarkgrey opacity-40 hover:opacity-80 focus:opacity-100 focus:outline-mogreen transition-all "
                 placeholder="+ New Objective"/>
         </form>
     );
 };
-
-export default NewObjectiveInput;
